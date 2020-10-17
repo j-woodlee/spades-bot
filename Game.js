@@ -1,3 +1,5 @@
+import Player from "./Player";
+import SpadesBot from "./SpadesBot";
 
 
 
@@ -6,7 +8,8 @@ export default class Game {
     constructor() {
             // suits: spades, hearts, clubs, diamonds 11 = jack, 12 = queen, 13 = king, 14 = ace
              // 15 = black joker, 16 = red joker
-        deck = [
+        this.deck = 
+        [
             new Card('S',2), new Card('S',3), new Card('S',4), new Card('S',5),
             new Card('S',6), new Card('S',7), new Card('S',8), new Card('S',9),
             new Card('S',10), new Card('S',11), new Card('S',12), new Card('S',13),
@@ -26,8 +29,27 @@ export default class Game {
             new Card('C',11), new Card('C',12),new Card('C',13), new Card('C',14)
         ];
 
-        bids = [null, null, null, null];
-        
+        this.currentBids = [null, null, null, null];
 
+        this.table = []; // array of cards
+
+        // create 4 players
+        this.player1 = new Player();
+        this.player2 = new Player();
+        this.player3 = new Player();
+        this.bot = new SpadesBot();
+    }
+
+    startHand = () => {
+        shuffle(this.deck);
+        this.dealCards();
+
+    }
+
+    dealCards = () => {
+        this.player1.cards = this.deck.slice(0, 13);
+        this.player2.cards = this.deck.slice(13, 26);
+        this.player3.cards = this.deck.slice(16, 39);
+        this.player4.currentCards = this.deck.slice(39, 52);
     }
 }
